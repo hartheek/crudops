@@ -2,7 +2,7 @@
 
 import EditNameForm from "@/components/editNameForm";
 
-const getNamebyid= async(id)=>{
+const getNamebyid= async(id:number)=>{
     try{
         const res= await fetch(`http://localhost:3001/names/${id}`,{
             cache:"no-store",
@@ -17,9 +17,13 @@ const getNamebyid= async(id)=>{
     }
 }
 
-const EditName= async ({params})=>{
+const EditName= async ({params}:{ params: { id: number } })=>{
+    interface NameData {
+        name: string;
+        university: string;
+    }
     const{id}= params;
-    const data= await getNamebyid(id);
+    const data:NameData= await getNamebyid(id);
     const{name, university}= data;
     console.log("id:",id)
     return (

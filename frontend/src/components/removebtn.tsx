@@ -4,7 +4,7 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { useRouter } from "next/navigation";
 
 
-const RemoveBtn=({id})=>{
+const RemoveBtn=({id}:{id:number})=>{
     const router =useRouter();
 
     const removeName= async()=>{

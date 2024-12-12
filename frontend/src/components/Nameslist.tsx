@@ -1,9 +1,13 @@
 import Link from "next/link";
 import RemoveBtn from "./removebtn";
 import {HiPencilAlt} from "react-icons/hi";
+interface namelist {
+    id: number;
+    name: string;
+    university: string;
+}
 
-
-    const getNames = async ()=>{
+    const getNames: () => Promise<namelist[]> = async ()=>{
         try{
             const res= await fetch("http://localhost:3001/names",{
                 cache: "no-store",
@@ -12,7 +16,8 @@ import {HiPencilAlt} from "react-icons/hi";
             if(!res.ok){
                 throw new Error('Failed to fetch topics');
             }
-            return res.json();
+            const data:namelist[]= await res.json();
+            return data;
         } catch (error){
             console.log("Error loading topics:",error);
             return []
@@ -22,7 +27,7 @@ import {HiPencilAlt} from "react-icons/hi";
         const names = await getNames();
     return(
         <>
-        {names.map(n=>(
+        {names.map((n: namelist)=>(
             <div className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start">
                 
                 <div>

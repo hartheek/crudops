@@ -2,13 +2,18 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+interface EditNameFormProps {
+  id: number;
+  name: string;
+  university: string;
+}
 
-const EditNameForm=({id, name, university})=>{
+const EditNameForm=({id, name, university}:EditNameFormProps)=>{
     const [newName, setNewName]= useState(name||"");
     const [newUniveristy, setNewUniveristy]= useState(university||"");
     const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newName.trim() || !newUniveristy.trim()) {
         alert("Both fields are required.");
